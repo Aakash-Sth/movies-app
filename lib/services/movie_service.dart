@@ -7,7 +7,7 @@ import 'package:movies_app/services/api_service.dart';
 class MovieService {
   final ApiService _apiService;
 
-  MovieService({required ApiService apiService}) : _apiService = apiService;
+  MovieService({required this._apiService});
 
   String baseUrl = ApiConstants.baseUrl;
   String apiKey = ApiConstants.apiKey;

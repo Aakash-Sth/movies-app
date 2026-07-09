@@ -5,6 +5,6 @@ import 'package:riverpod_annotation/riverpod_annotation.dart';
 part 'movies_provider.g.dart';
 
 @riverpod
-Future<List<Movie>> movies(MoviesRef ref, String category) {
+Future<List<Movie>> movies(Ref ref, String category) {
   return ref.read(movieServiceProvider).getMovies(category);
 }

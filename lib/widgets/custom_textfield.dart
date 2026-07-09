@@ -10,11 +10,12 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final TextEditingController controller;
   final String? validatorText;
-  const CustomTextField(
-      {required this.label,
-      super.key,
-      required this.controller,
-      this.validatorText});
+  const CustomTextField({
+    required this.label,
+    super.key,
+    required this.controller,
+    this.validatorText,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -28,34 +29,29 @@ class CustomTextField extends StatelessWidget {
         return Padding(
           padding: const EdgeInsets.only(bottom: 20),
           child: TextFormField(
-            style: GoogleFonts.roboto(
-              fontSize: Sizes.title,
-              letterSpacing: 0.15,
-            ),
+            style: GoogleFonts.roboto(fontSize: Sizes.s16, letterSpacing: 0.15),
             controller: controller,
             decoration: InputDecoration(
               labelStyle: const TextStyle(
-                fontSize: Sizes.h6,
+                fontSize: Sizes.s12,
                 fontWeight: FontWeight.w400,
                 letterSpacing: 0.15,
                 color: Colors.white,
               ),
               label: Text(
                 label,
-                style: const TextStyle(
-                  fontWeight: FontWeight.w400,
-                  fontSize: Sizes.title,
-                ),
+                style: const TextStyle(fontWeight: FontWeight.w400, fontSize: Sizes.s16),
               ),
               suffixIcon: isNotUsername
                   ? IconButton(
                       icon: Icon(icon),
                       onPressed: () {
-                        icon == Icons.visibility
-                            ? ref.read(iconProvider.notifier).state =
-                                Icons.visibility_off
-                            : ref.read(iconProvider.notifier).state =
-                                Icons.visibility;
+                        ref.read(iconProvider.notifier).toggleIcon();
+                        // icon == Icons.visibility
+                        //     ? .state =
+                        //         Icons.visibility_off
+                        //     : ref.read(iconProvider.notifier).state =
+                        //         Icons.visibility;
                         isObscure = !isObscure;
                       },
                     )

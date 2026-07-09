@@ -16,68 +16,60 @@ class SearchScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          "Search",
-          style: Theme.of(context).textTheme.headline3,
-        ),
+        title: Text("Search", style: Theme.of(context).textTheme.bodyMedium),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.info_outline))
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.info_outline, color: Colors.white),
+          ),
         ],
       ),
       body: NestedScrollView(
-          headerSliverBuilder: (context, innerBoxIsScrolled) => [
-                const SliverToBoxAdapter(
-                  child: SearchTextField(),
-                ),
-              ],
-          body: Consumer(
-            builder: (context, ref, child) {
-              final searchState = ref.watch(searchedMoviesProvider);
-              if (searchState is SearchInitial) {
-                return const Text("");
-              } else if (searchState is SearchLoading) {
-                return const DataLoading();
-              } else if (searchState is SearchLoaded) {
-                final searchedMovies = searchState.movies;
-                return searchedMovies.isEmpty
-                    ? Center(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            SvgPicture.asset("assets/icons/searching.svg"),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.only(top: 15, bottom: 8),
-                              child: Text(
-                                "We Are Sorry, We Can\n Not Find The Movie :(",
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headline3!
-                                    .copyWith(height: 1.5),
-                              ),
+        headerSliverBuilder: (context, innerBoxIsScrolled) => [
+          const SliverToBoxAdapter(child: SearchTextField()),
+        ],
+        body: Consumer(
+          builder: (context, ref, child) {
+            final searchState = ref.watch(searchedMoviesProvider);
+            if (searchState is SearchInitial) {
+              return const Text("");
+            } else if (searchState is SearchLoading) {
+              return const DataLoading();
+            } else if (searchState is SearchLoaded) {
+              final searchedMovies = searchState.movies;
+              return searchedMovies.isEmpty
+                  ? Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          SvgPicture.asset("assets/icons/searching.svg"),
+                          Padding(
+                            padding: const EdgeInsets.only(top: 15, bottom: 8),
+                            child: Text(
+                              "We Are Sorry, We Can\n Not Find The Movie :(",
+                              style: Theme.of(context).textTheme.bodyMedium!.copyWith(height: 1.5),
                             ),
-                            Text(
-                              "Find your movie by type, title,\n categories, years, etc ",
-                              style:
-                                  Theme.of(context).textTheme.subtitle2!.apply(
-                                        color: AppColors.hintText,
-                                      ),
-                              textAlign: TextAlign.center,
-                            )
-                          ],
-                        ),
-                      )
-                    : ListView.builder(
-                        itemBuilder: (context, index) => WatchListItem(
-                          movie: searchedMovies[index],
-                        ),
-                        itemCount: searchedMovies.length,
-                      );
-              } else {
-                return const Center(child: Text("An error occured."));
-              }
-            },
-          )),
+                          ),
+                          Text(
+                            "Find your movie by type, title,\n categories, years, etc ",
+                            style: Theme.of(
+                              context,
+                            ).textTheme.labelMedium!.apply(color: AppColors.hintText),
+                            textAlign: TextAlign.center,
+                          ),
+                        ],
+                      ),
+                    )
+                  : ListView.builder(
+                      itemBuilder: (context, index) => WatchListItem(movie: searchedMovies[index]),
+                      itemCount: searchedMovies.length,
+                    );
+            } else {
+              return const Center(child: Text("An error occured."));
+            }
+          },
+        ),
+      ),
     );
   }
 }

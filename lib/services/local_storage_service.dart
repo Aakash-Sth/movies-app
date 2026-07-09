@@ -1,15 +1,15 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LocalStorageService {
-  late SharedPreferences _prefs;
+  late FlutterSecureStorage _secureStorage;
 
   Future<String?> loadSessionId() async {
-    _prefs = await SharedPreferences.getInstance();
-    String? sessionId = _prefs.getString("sessionId");
+    _secureStorage = FlutterSecureStorage();
+    String? sessionId = await _secureStorage.read(key: "sessionId");
     return sessionId;
   }
 
-  void setSessionId(String id) => _prefs.setString("sessionId", id);
+  void setSessionId(String id) => _secureStorage.write(key: "sessionId", value: id);
 
-  void removeSessionId() => _prefs.remove("sessionId");
+  void removeSessionId() => _secureStorage.delete(key: "sessionId");
 }

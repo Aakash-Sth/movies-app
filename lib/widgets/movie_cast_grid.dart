@@ -16,7 +16,7 @@ class MovieCastGrid extends ConsumerWidget {
     final mediaQuery = MediaQuery.of(context);
     final devicePixelRatio = mediaQuery.devicePixelRatio;
     final screenSize = mediaQuery.size;
-    final imageSize = screenSize.height * 0.12;
+    final imageSize = screenSize.width * 0.3;
     final cachedImageSize = (imageSize * devicePixelRatio).ceil();
 
     final castProvider = ref.watch(movieCastProvider(id));
@@ -25,7 +25,9 @@ class MovieCastGrid extends ConsumerWidget {
           ? const Text("No cast is available for this film.")
           : GridView.builder(
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, crossAxisSpacing: 24),
+                crossAxisCount: 2,
+                crossAxisSpacing: 24,
+              ),
               itemBuilder: (context, index) {
                 MovieCast cast = castList[index];
                 return Column(
@@ -34,30 +36,22 @@ class MovieCastGrid extends ConsumerWidget {
                       borderRadius: BorderRadius.circular(100),
                       child: CachedNetworkImage(
                         imageUrl: cast.imageUrl,
-                        height: imageSize,
+                        height: imageSize - 5,
                         width: imageSize,
                         memCacheHeight: cachedImageSize,
                         memCacheWidth: cachedImageSize,
-                        fit: BoxFit.fill,
-                        errorWidget: (context, url, error) =>
-                            const ImageLoadError(),
+                        fit: BoxFit.cover,
+                        errorWidget: (context, url, error) => const ImageLoadError(),
                       ),
                     ),
-                    const SizedBox(
-                      height: 8,
-                    ),
-                    Text(
-                      cast.name,
-                      style: Theme.of(context).textTheme.subtitle1,
-                    ),
+                    const SizedBox(height: 8),
+                    Text(cast.name, style: Theme.of(context).textTheme.labelSmall),
                   ],
                 );
               },
               itemCount: castList.length,
             ),
-      error: (error, stackTrace) => DataLoadError(
-        provider: movieCastProvider(id),
-      ),
+      error: (error, stackTrace) => DataLoadError(provider: movieCastProvider(id)),
       loading: () => const DataLoading(),
     );
   }

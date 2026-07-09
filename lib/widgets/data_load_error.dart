@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_riverpod/misc.dart';
 
 class DataLoadError extends ConsumerWidget {
   final Refreshable? provider;
@@ -19,7 +20,7 @@ class DataLoadError extends ConsumerWidget {
           IconButton(
             onPressed: () => ref.refresh(provider!),
             icon: const Icon(Icons.replay_outlined),
-          )
+          ),
         ],
       ),
     );

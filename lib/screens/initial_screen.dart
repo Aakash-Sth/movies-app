@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fluttertoast/fluttertoast.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:movies_app/notifiers/auth_state.dart';
 import 'package:movies_app/providers/auth_provider.dart';
 import 'package:movies_app/screens/login_screen.dart';
@@ -30,13 +30,8 @@ class InitialScreenState extends ConsumerState {
           const loginScreen = LoginScreen();
           if (authState is AuthLoaded) {
             String message = authState.message;
-            if (message.isNotEmpty) {
-              Fluttertoast.showToast(
-                  msg: message, toastLength: Toast.LENGTH_SHORT);
-            }
-            return authState.sessionId.isEmpty
-                ? loginScreen
-                : const TabsScreen();
+
+            return authState.sessionId.isEmpty ? loginScreen : const TabsScreen();
           } else if (authState is AuthLoading) {
             return loginScreen;
           } else {

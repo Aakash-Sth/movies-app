@@ -19,49 +19,45 @@ class TabsScreen extends ConsumerWidget {
     const unselectedColor = AppColors.hintText;
     final selectedIndex = ref.watch(pageIndexProvider);
 
-    List<Widget> screens = [
-      const HomeScreen(),
-      const SearchScreen(),
-      const WatchListScreen()
-    ];
+    List<Widget> screens = [const HomeScreen(), const SearchScreen(), const WatchListScreen()];
 
     List<Map<String, dynamic>> navItems = [
       {"iconPath": "assets/icons/home.svg", "label": "Home"},
       {"iconPath": "assets/icons/searchBottom.svg", "label": "Search"},
-      {"iconPath": "assets/icons/watchList.svg", "label": "WatchList"}
+      {"iconPath": "assets/icons/watchList.svg", "label": "WatchList"},
     ];
     return Scaffold(
       body: IndexedStack(index: selectedIndex, children: screens),
       bottomNavigationBar: Container(
         decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: AppColors.strokeColor),
-          ),
+          border: Border(top: BorderSide(color: AppColors.strokeColor)),
         ),
         child: BottomNavigationBar(
+          backgroundColor: AppColors.canvasColor,
           selectedItemColor: selectedColor,
-          selectedIconTheme: const IconThemeData(color: selectedColor),
           unselectedItemColor: unselectedColor,
-          unselectedIconTheme: const IconThemeData(color: unselectedColor),
           selectedLabelStyle: GoogleFonts.roboto(height: 2),
-          selectedFontSize: Sizes.h6,
+          selectedFontSize: Sizes.s12,
+
           currentIndex: selectedIndex,
+
           onTap: (index) {
-            ref.read(pageIndexProvider.notifier).state = index;
+            ref.read(pageIndexProvider.notifier).selectedIndex = index;
           },
           items: navItems
               .map(
                 (navItem) => BottomNavigationBarItem(
                   icon: Padding(
                     padding: const EdgeInsets.only(top: 10),
-                    child: SvgPicture.asset(
-                      navItem["iconPath"],
-                    ),
+                    child: SvgPicture.asset(navItem["iconPath"]),
                   ),
                   label: navItem["label"],
-                  activeIcon: SvgPicture.asset(
-                    navItem["iconPath"],
-                    color: selectedColor,
+                  activeIcon: Padding(
+                    padding: const EdgeInsets.only(top: 10),
+                    child: SvgPicture.asset(
+                      navItem["iconPath"],
+                      colorFilter: ColorFilter.mode(selectedColor, BlendMode.srcIn),
+                    ),
                   ),
                 ),
               )

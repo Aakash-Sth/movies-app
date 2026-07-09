@@ -24,10 +24,11 @@ class LoginScreen extends StatelessWidget {
                   child: const Text(
                     "Movies App",
                     style: TextStyle(
-                        fontWeight: FontWeight.w700,
-                        letterSpacing: 0.15,
-                        fontSize: Sizes.heading,
-                        color: AppColors.strokeColor),
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: 0.15,
+                      fontSize: Sizes.s28,
+                      color: AppColors.strokeColor,
+                    ),
                   ),
                 ),
                 Text(
@@ -35,10 +36,10 @@ class LoginScreen extends StatelessWidget {
                   style: GoogleFonts.roboto(
                     fontWeight: FontWeight.w700,
                     letterSpacing: 0.15,
-                    fontSize: Sizes.h3,
+                    fontSize: Sizes.s26,
                   ),
                 ),
-                const AuthDetails()
+                const AuthDetails(),
               ],
             ),
           ),

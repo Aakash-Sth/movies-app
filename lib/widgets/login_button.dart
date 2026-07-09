@@ -11,8 +11,7 @@ class LoginButton extends ConsumerWidget {
   final GlobalKey<FormState> formkey;
   final Function authenticate;
 
-  const LoginButton(
-      {required this.authenticate, required this.formkey, super.key});
+  const LoginButton({required this.authenticate, required this.formkey, super.key});
 
   @override
   Widget build(BuildContext context, ref) {
@@ -29,19 +28,18 @@ class LoginButton extends ConsumerWidget {
           child: Text(
             "Login",
             style: GoogleFonts.roboto(
-                fontWeight: FontWeight.w700,
-                fontSize: Sizes.button,
-                color: Colors.white),
+              fontWeight: FontWeight.w700,
+              fontSize: Sizes.s21,
+              color: Colors.white,
+            ),
           ),
         ),
         if (ref.watch(authProvider) is AuthLoading)
           Container(
-            color: AppColors.canvasColor.withOpacity(0.2),
+            color: AppColors.canvasColor.withValues(alpha: 0.2),
             height: 51,
             alignment: Alignment.center,
-            child: const CircularProgressIndicator(
-              color: Colors.white,
-            ),
+            child: const CircularProgressIndicator(color: Colors.white),
           ),
       ],
     );

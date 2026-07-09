@@ -21,21 +21,14 @@ class WatchListItem extends ConsumerWidget {
     return InkWell(
       splashColor: Colors.transparent,
       highlightColor: Colors.transparent,
-      onTap: () => context.push(
-        MovieDetailsScreen(id: movie.id),
-      ),
+      onTap: () => context.push(MovieDetailsScreen(id: movie.id)),
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
         child: IntrinsicHeight(
           child: Row(
             children: [
-              CustomImage(
-                posterUrl: movie.posterUrl,
-                isSmall: true,
-              ),
-              const SizedBox(
-                width: 12,
-              ),
+              CustomImage(posterUrl: movie.posterUrl, isSmall: true),
+              const SizedBox(width: 12),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -44,28 +37,18 @@ class WatchListItem extends ConsumerWidget {
                     width: MediaQuery.of(context).size.width * 0.49,
                     child: Text(
                       movie.title,
-                      style: GoogleFonts.poppins(fontSize: Sizes.title),
+                      style: GoogleFonts.poppins(fontSize: Sizes.s16),
                       overflow: TextOverflow.ellipsis,
                     ),
                   ),
-                  const SizedBox(
-                    height: 3,
-                  ),
-                  MovieRating(
-                    rating: movie.rating.toStringAsFixed(1),
-                  ),
+                  const SizedBox(height: 3),
+                  MovieRating(rating: movie.rating.toStringAsFixed(1)),
                   ...datas.map(
                     (data) => Row(
                       children: [
-                        SvgPicture.asset(
-                          data["icon"],
-                          color: Colors.white,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Text(data["label"],
-                            style: Theme.of(context).textTheme.headline6!),
+                        SvgPicture.asset(data["icon"], color: Colors.white),
+                        const SizedBox(width: 5),
+                        Text(data["label"], style: Theme.of(context).textTheme.bodySmall!),
                       ],
                     ),
                   ),

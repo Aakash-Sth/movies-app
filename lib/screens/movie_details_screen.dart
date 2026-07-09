@@ -25,21 +25,17 @@ class MovieDetailsScreen extends ConsumerWidget {
       data: (movie) {
         return Scaffold(
           appBar: AppBar(
-            title: Text(
-              "Detail",
-              style: Theme.of(context).textTheme.headline3,
-            ),
+            title: Text("Detail", style: Theme.of(context).textTheme.bodyMedium),
             actions: [
               IconButton(
                 onPressed: () {
-                  ref
-                      .read(watchListProvider.notifier)
-                      .toggleInWatchList(movieProvider.value!);
+                  ref.read(watchListProvider.notifier).toggleInWatchList(movieProvider.value!);
                 },
-                icon: Icon(watchList.contains(movieProvider.value!)
-                    ? Icons.bookmark
-                    : Icons.bookmark_border),
-              )
+                icon: Icon(
+                  watchList.contains(movieProvider.value!) ? Icons.bookmark : Icons.bookmark_border,
+                  color: AppColors.defaultColor,
+                ),
+              ),
             ],
           ),
           body: DefaultTabController(
@@ -50,29 +46,23 @@ class MovieDetailsScreen extends ConsumerWidget {
                   child: Column(
                     children: [
                       BasicMovieDetails(movie: movie),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 24,
-                          horizontal: 20,
+                      TabBar(
+                        // isScrollable: true,
+                        padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 20),
+
+                        dividerHeight: 0,
+                        // tabAlignment: TabAlignment.start,
+                        indicatorSize: TabBarIndicatorSize.tab,
+                        indicator: const UnderlineTabIndicator(
+                          borderSide: BorderSide(color: AppColors.textField, width: 4),
                         ),
-                        child: TabBar(
-                          indicatorSize: TabBarIndicatorSize.label,
-                          indicator: const UnderlineTabIndicator(
-                            borderSide: BorderSide(
-                                color: AppColors.textField, width: 4),
-                          ),
-                          tabs: tabs
-                              .map(
-                                (tab) => Tab(
-                                  child: Text(
-                                    tab,
-                                    style:
-                                        Theme.of(context).textTheme.headline5,
-                                  ),
-                                ),
-                              )
-                              .toList(),
-                        ),
+                        tabs: tabs
+                            .map(
+                              (tab) => Tab(
+                                child: Text(tab, style: Theme.of(context).textTheme.bodySmall),
+                              ),
+                            )
+                            .toList(),
                       ),
                     ],
                   ),
@@ -86,10 +76,10 @@ class MovieDetailsScreen extends ConsumerWidget {
                       movie.overview.isEmpty
                           ? "No description available for this movie"
                           : movie.overview,
-                      style: GoogleFonts.poppins(fontSize: Sizes.h6),
+                      style: GoogleFonts.poppins(fontSize: Sizes.s12),
                     ),
                     MovieReviewList(id: movie.id),
-                    MovieCastGrid(id: movie.id)
+                    MovieCastGrid(id: movie.id),
                   ],
                 ),
               ),
@@ -99,14 +89,9 @@ class MovieDetailsScreen extends ConsumerWidget {
       },
       error: (error, stackTrace) => Scaffold(
         appBar: AppBar(),
-        body: DataLoadError(
-          provider: movieDetailsProvider(id),
-        ),
+        body: DataLoadError(provider: movieDetailsProvider(id)),
       ),
-      loading: () => Scaffold(
-        appBar: AppBar(),
-        body: const DataLoading(),
-      ),
+      loading: () => Scaffold(appBar: AppBar(), body: const DataLoading()),
     );
   }
 }

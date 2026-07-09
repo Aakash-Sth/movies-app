@@ -6,96 +6,88 @@ part of 'basic_movie_data_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// ignore_for_file: avoid_private_typedef_functions, non_constant_identifier_names, subtype_of_sealed_class, invalid_use_of_internal_member, unused_element, constant_identifier_names, unnecessary_raw_strings, library_private_types_in_public_api
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
+@ProviderFor(basicMovieData)
+final basicMovieDataProvider = BasicMovieDataFamily._();
 
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
+final class BasicMovieDataProvider
+    extends
+        $FunctionalProvider<
+          List<Map<String, dynamic>>,
+          List<Map<String, dynamic>>,
+          List<Map<String, dynamic>>
+        >
+    with $Provider<List<Map<String, dynamic>>> {
+  BasicMovieDataProvider._({
+    required BasicMovieDataFamily super.from,
+    required Movie super.argument,
+  }) : super(
+         retry: null,
+         name: r'basicMovieDataProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$basicMovieDataHash();
+
+  @override
+  String toString() {
+    return r'basicMovieDataProvider'
+        ''
+        '($argument)';
   }
 
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  @$internal
+  @override
+  $ProviderElement<List<Map<String, dynamic>>> $createElement(
+    $ProviderPointer pointer,
+  ) => $ProviderElement(pointer);
+
+  @override
+  List<Map<String, dynamic>> create(Ref ref) {
+    final argument = this.argument as Movie;
+    return basicMovieData(ref, argument);
   }
-}
 
-String $basicMovieDataHash() => r'ac9043a252471e62c638b5ad61e3545961b2b690';
-
-/// See also [basicMovieData].
-class BasicMovieDataProvider
-    extends AutoDisposeProvider<List<Map<String, dynamic>>> {
-  BasicMovieDataProvider(
-    this.movie,
-  ) : super(
-          (ref) => basicMovieData(
-            ref,
-            movie,
-          ),
-          from: basicMovieDataProvider,
-          name: r'basicMovieDataProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : $basicMovieDataHash,
-        );
-
-  final Movie movie;
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(List<Map<String, dynamic>> value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<List<Map<String, dynamic>>>(value),
+    );
+  }
 
   @override
   bool operator ==(Object other) {
-    return other is BasicMovieDataProvider && other.movie == movie;
+    return other is BasicMovieDataProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, movie.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-typedef BasicMovieDataRef = AutoDisposeProviderRef<List<Map<String, dynamic>>>;
+String _$basicMovieDataHash() => r'09367d1b19a941f654f11e78c978429075f7fa1d';
 
-/// See also [basicMovieData].
-final basicMovieDataProvider = BasicMovieDataFamily();
+final class BasicMovieDataFamily extends $Family
+    with $FunctionalFamilyOverride<List<Map<String, dynamic>>, Movie> {
+  BasicMovieDataFamily._()
+    : super(
+        retry: null,
+        name: r'basicMovieDataProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
-class BasicMovieDataFamily extends Family<List<Map<String, dynamic>>> {
-  BasicMovieDataFamily();
-
-  BasicMovieDataProvider call(
-    Movie movie,
-  ) {
-    return BasicMovieDataProvider(
-      movie,
-    );
-  }
-
-  @override
-  AutoDisposeProvider<List<Map<String, dynamic>>> getProviderOverride(
-    covariant BasicMovieDataProvider provider,
-  ) {
-    return call(
-      provider.movie,
-    );
-  }
+  BasicMovieDataProvider call(Movie movie) =>
+      BasicMovieDataProvider._(argument: movie, from: this);
 
   @override
-  List<ProviderOrFamily>? get allTransitiveDependencies => null;
-
-  @override
-  List<ProviderOrFamily>? get dependencies => null;
-
-  @override
-  String? get name => r'basicMovieDataProvider';
+  String toString() => r'basicMovieDataProvider';
 }

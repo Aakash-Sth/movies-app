@@ -6,95 +6,80 @@ part of 'movies_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// ignore_for_file: avoid_private_typedef_functions, non_constant_identifier_names, subtype_of_sealed_class, invalid_use_of_internal_member, unused_element, constant_identifier_names, unnecessary_raw_strings, library_private_types_in_public_api
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
+@ProviderFor(movies)
+final moviesProvider = MoviesFamily._();
 
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
+final class MoviesProvider
+    extends
+        $FunctionalProvider<
+          AsyncValue<List<Movie>>,
+          List<Movie>,
+          FutureOr<List<Movie>>
+        >
+    with $FutureModifier<List<Movie>>, $FutureProvider<List<Movie>> {
+  MoviesProvider._({
+    required MoviesFamily super.from,
+    required String super.argument,
+  }) : super(
+         retry: null,
+         name: r'moviesProvider',
+         isAutoDispose: true,
+         dependencies: null,
+         $allTransitiveDependencies: null,
+       );
+
+  @override
+  String debugGetCreateSourceHash() => _$moviesHash();
+
+  @override
+  String toString() {
+    return r'moviesProvider'
+        ''
+        '($argument)';
   }
 
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  @$internal
+  @override
+  $FutureProviderElement<List<Movie>> $createElement(
+    $ProviderPointer pointer,
+  ) => $FutureProviderElement(pointer);
+
+  @override
+  FutureOr<List<Movie>> create(Ref ref) {
+    final argument = this.argument as String;
+    return movies(ref, argument);
   }
-}
-
-String $moviesHash() => r'7edd1a04abdf184ff6129dcf60dceb980dd14445';
-
-/// See also [movies].
-class MoviesProvider extends AutoDisposeFutureProvider<List<Movie>> {
-  MoviesProvider(
-    this.category,
-  ) : super(
-          (ref) => movies(
-            ref,
-            category,
-          ),
-          from: moviesProvider,
-          name: r'moviesProvider',
-          debugGetCreateSourceHash:
-              const bool.fromEnvironment('dart.vm.product')
-                  ? null
-                  : $moviesHash,
-        );
-
-  final String category;
 
   @override
   bool operator ==(Object other) {
-    return other is MoviesProvider && other.category == category;
+    return other is MoviesProvider && other.argument == argument;
   }
 
   @override
   int get hashCode {
-    var hash = _SystemHash.combine(0, runtimeType.hashCode);
-    hash = _SystemHash.combine(hash, category.hashCode);
-
-    return _SystemHash.finish(hash);
+    return argument.hashCode;
   }
 }
 
-typedef MoviesRef = AutoDisposeFutureProviderRef<List<Movie>>;
+String _$moviesHash() => r'0fa35e7e3232322e4b10284df5896d7cb4a150d4';
 
-/// See also [movies].
-final moviesProvider = MoviesFamily();
+final class MoviesFamily extends $Family
+    with $FunctionalFamilyOverride<FutureOr<List<Movie>>, String> {
+  MoviesFamily._()
+    : super(
+        retry: null,
+        name: r'moviesProvider',
+        dependencies: null,
+        $allTransitiveDependencies: null,
+        isAutoDispose: true,
+      );
 
-class MoviesFamily extends Family<AsyncValue<List<Movie>>> {
-  MoviesFamily();
-
-  MoviesProvider call(
-    String category,
-  ) {
-    return MoviesProvider(
-      category,
-    );
-  }
-
-  @override
-  AutoDisposeFutureProvider<List<Movie>> getProviderOverride(
-    covariant MoviesProvider provider,
-  ) {
-    return call(
-      provider.category,
-    );
-  }
+  MoviesProvider call(String category) =>
+      MoviesProvider._(argument: category, from: this);
 
   @override
-  List<ProviderOrFamily>? get allTransitiveDependencies => null;
-
-  @override
-  List<ProviderOrFamily>? get dependencies => null;
-
-  @override
-  String? get name => r'moviesProvider';
+  String toString() => r'moviesProvider';
 }

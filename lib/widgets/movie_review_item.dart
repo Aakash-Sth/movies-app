@@ -35,26 +35,19 @@ class MovieReviewItem extends StatelessWidget {
                   errorWidget: (context, url, error) => const ImageLoadError(),
                 ),
               ),
-              const SizedBox(
-                height: 14,
-              ),
+              const SizedBox(height: 14),
               Text(
                 review.rating.toString(),
-                style: Theme.of(context)
-                    .textTheme
-                    .subtitle1!
-                    .apply(color: AppColors.strokeColor),
-              )
+                style: Theme.of(context).textTheme.labelSmall!.apply(color: AppColors.strokeColor),
+              ),
             ],
           ),
-          SizedBox(
-            width: screenSize.width * 0.035,
-          ),
+          SizedBox(width: screenSize.width * 0.035),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(review.author, style: Theme.of(context).textTheme.subtitle1),
+              Text(review.author, style: Theme.of(context).textTheme.labelSmall),
               Container(
                 padding: const EdgeInsets.only(top: 3),
                 width: MediaQuery.of(context).size.width * 0.7,
@@ -62,9 +55,9 @@ class MovieReviewItem extends StatelessWidget {
                   review.content,
                   maxLines: 5,
                   overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: Sizes.h6, height: 1.5),
+                  style: const TextStyle(fontSize: Sizes.s12, height: 1.5),
                 ),
-              )
+              ),
             ],
           ),
         ],

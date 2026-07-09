@@ -10,5 +10,5 @@ class AppColors {
   static const Color rating = Color(0xFFFF8700);
   static const Color strokeColor = Color(0xFF0296E5);
   static const Color errorColor = Colors.red;
-  static const Color defaultColor = Colors.white;
+  static const Color defaultColor = Color(0xFFEEEEEE);
 }

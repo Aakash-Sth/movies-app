@@ -6,6 +6,6 @@ import '../models/review.dart';
 part 'movie_reviews_provider.g.dart';
 
 @riverpod
-Future<List<Review>> movieReviews(MovieReviewsRef ref, int movieId) {
+Future<List<Review>> movieReviews(Ref ref, int movieId) {
   return ref.read(movieServiceProvider).getReviews(movieId);
 }

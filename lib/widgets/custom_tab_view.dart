@@ -17,39 +17,32 @@ class CustomTabView extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.only(right: 24),
       child: TabBarView(
-        children: tabs.map(
-          (tab) {
-            final provider = moviesProvider(tab);
-            final popularMovies = ref.watch(provider);
-            return Tab(
-              child: popularMovies.when(
-                data: (movies) => GridView.builder(
-                  addRepaintBoundaries: false,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 3,
-                      childAspectRatio: 0.7,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 20,
-                      mainAxisExtent: MediaQuery.of(context).size.height * 0.2),
-                  itemBuilder: (context, index) => GestureDetector(
-                    onTap: () => context.push(
-                      MovieDetailsScreen(id: movies[index].id),
-                    ),
-                    child: CustomImage(
-                      posterUrl: movies[index].posterUrl,
-                      isSmall: true,
-                    ),
-                  ),
-                  itemCount: movies.length,
+        children: tabs.map((tab) {
+          final provider = moviesProvider(tab);
+          final popularMovies = ref.watch(provider);
+          return Tab(
+            child: popularMovies.when(
+              data: (movies) => GridView.builder(
+                padding: EdgeInsets.only(top: 20, left: 24),
+                // addRepaintBoundaries: false,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3,
+                  childAspectRatio: 0.7,
+                  crossAxisSpacing: 10,
+                  mainAxisSpacing: 20,
+                  mainAxisExtent: MediaQuery.of(context).size.height * 0.2,
                 ),
-                error: (error, stackTrace) => DataLoadError(
-                  provider: provider,
+                itemBuilder: (context, index) => GestureDetector(
+                  onTap: () => context.push(MovieDetailsScreen(id: movies[index].id)),
+                  child: CustomImage(posterUrl: movies[index].posterUrl, isSmall: true),
                 ),
-                loading: () => const DataLoading(),
+                itemCount: movies.length,
               ),
-            );
-          },
-        ).toList(),
+              error: (error, stackTrace) => DataLoadError(provider: provider),
+              loading: () => const DataLoading(),
+            ),
+          );
+        }).toList(),
       ),
     );
   }

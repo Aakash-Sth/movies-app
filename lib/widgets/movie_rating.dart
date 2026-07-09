@@ -21,7 +21,7 @@ class MovieRating extends StatelessWidget {
           rating,
           style: GoogleFonts.montserrat(
             fontWeight: FontWeight.w600,
-            fontSize: Sizes.h6,
+            fontSize: Sizes.s12,
             color: AppColors.rating,
           ),
         )

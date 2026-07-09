@@ -6,8 +6,6 @@ import '../services/movie_service.dart';
 part "movie_service_provider.g.dart";
 
 @riverpod
-MovieService movieService(MovieServiceRef ref) {
-  return MovieService(
-    apiService: ref.read(apiServiceProvider),
-  );
+MovieService movieService(Ref ref) {
+  return MovieService(apiService: ref.read(apiServiceProvider));
 }

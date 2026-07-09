@@ -11,12 +11,7 @@ class WatchListScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, ref) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "WatchList",
-          style: Theme.of(context).textTheme.headline3,
-        ),
-      ),
+      appBar: AppBar(title: Text("WatchList", style: Theme.of(context).textTheme.bodyMedium)),
       body: Consumer(
         builder: (context, ref, child) {
           final watchList = ref.watch(watchListProvider);
@@ -28,31 +23,29 @@ class WatchListScreen extends ConsumerWidget {
                     children: [
                       SvgPicture.asset(
                         "assets/icons/emptyBox.svg",
-                        color: AppColors.strokeColor,
+                        colorFilter: ColorFilter.mode(AppColors.strokeColor, BlendMode.srcIn),
                       ),
                       Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20),
                         child: Text(
                           "There is no movie yet!",
-                          style: Theme.of(context).textTheme.headline3,
+                          style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),
                       Text(
                         "Find your movie by type, title,\n categories, years, etc ",
-                        style: Theme.of(context).textTheme.subtitle2!.apply(
-                              color: AppColors.hintText,
-                            ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.labelMedium!.apply(color: AppColors.hintText),
                         textAlign: TextAlign.center,
-                      )
+                      ),
                     ],
                   ),
                 )
               : ListView.builder(
                   itemBuilder: (context, index) {
                     final movie = watchList[index];
-                    return WatchListItem(
-                      movie: movie,
-                    );
+                    return WatchListItem(movie: movie);
                   },
                   itemCount: watchList.length,
                 );

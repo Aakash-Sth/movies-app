@@ -17,7 +17,7 @@ class MovieReviewList extends ConsumerWidget {
       data: (reviews) {
         return reviews.isEmpty
             ? Text("No review is available for this film.",
-                style: Theme.of(context).textTheme.subtitle1)
+                style: Theme.of(context).textTheme.labelSmall)
             : ListView.builder(
                 itemBuilder: (context, index) => MovieReviewItem(
                   review: reviews[index],
@@ -25,8 +25,7 @@ class MovieReviewList extends ConsumerWidget {
                 itemCount: reviews.length,
               );
       },
-      error: (error, stackTrace) =>
-          DataLoadError(provider: movieReviewsProvider(id)),
+      error: (error, stackTrace) => DataLoadError(provider: movieReviewsProvider(id)),
       loading: () => const DataLoading(),
     );
   }

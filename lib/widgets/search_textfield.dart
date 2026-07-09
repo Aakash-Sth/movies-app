@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:movies_app/providers/page_index_provider.dart';
-import 'package:movies_app/providers/searched_movies_provider.dart';
 import 'package:movies_app/providers/search_editing_controller_provider.dart';
+import 'package:movies_app/providers/searched_movies_provider.dart';
 
 import '../sizes.dart';
 import '../styles/app_colors.dart';
@@ -16,9 +16,8 @@ class SearchTextField extends ConsumerWidget {
   Widget build(BuildContext context, ref) {
     final searchController = ref.read(searchControllerProvider);
 
-    void searchMovies() => ref
-        .read(searchedMoviesProvider.notifier)
-        .searchMovies(searchController.text);
+    void searchMovies() =>
+        ref.read(searchedMoviesProvider.notifier).searchMovies(searchController.text);
 
     return Padding(
       padding: const EdgeInsets.all(24),
@@ -40,12 +39,11 @@ class SearchTextField extends ConsumerWidget {
               borderRadius: BorderRadius.circular(16),
               borderSide: const BorderSide(color: AppColors.textField),
             ),
-            hintStyle:
-                const TextStyle(color: AppColors.hintText, fontSize: Sizes.h5),
+            hintStyle: const TextStyle(color: AppColors.hintText, fontSize: Sizes.s14),
             suffixIcon: IconButton(
               onPressed: () {
                 if (isHomeScreen) {
-                  ref.read(pageIndexProvider.notifier).state = 1;
+                  ref.read(pageIndexProvider.notifier).selectedIndex = 1;
                 }
                 searchMovies();
               },

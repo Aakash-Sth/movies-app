@@ -9,11 +9,10 @@ typedef ErrorMessage = String;
 class AuthService {
   final ApiService _apiService;
 
-  AuthService({required ApiService apiService}) : _apiService = apiService;
+  AuthService({required this._apiService});
 
   Future<String> getRequestToken() async {
-    String uri =
-        "${ApiConstants.baseUrl}/authentication/token/new?api_key=${ApiConstants.apiKey}";
+    String uri = "${ApiConstants.baseUrl}/authentication/token/new?api_key=${ApiConstants.apiKey}";
     final apiData = await _apiService.getApiData(uri);
 
     if (apiData["success"] == true) {
@@ -23,8 +22,10 @@ class AuthService {
     }
   }
 
-  Future<Either<RequestToken, ErrorMessage>> validateUser(
-      {required String username, required String password}) async {
+  Future<Either<RequestToken, ErrorMessage>> validateUser({
+    required String username,
+    required String password,
+  }) async {
     final getToken = await getRequestToken();
     String requestToken = "";
     if (!getToken.contains("Failed")) {
@@ -35,11 +36,7 @@ class AuthService {
 
     String uri =
         "${ApiConstants.baseUrl}/authentication/token/validate_with_login?api_key=${ApiConstants.apiKey}";
-    final body = {
-      "username": username,
-      "password": password,
-      "request_token": requestToken
-    };
+    final body = {"username": username, "password": password, "request_token": requestToken};
 
     final apiData = await _apiService.postData(uri, body);
     if (apiData["success"] == true) {
@@ -49,21 +46,19 @@ class AuthService {
     }
   }
 
-  Future<Either<SessionId, ErrorMessage>> getSessionId(
-      {required String username, required String password}) async {
-    final tokenValidator =
-        await validateUser(username: username, password: password);
+  Future<Either<SessionId, ErrorMessage>> getSessionId({
+    required String username,
+    required String password,
+  }) async {
+    final tokenValidator = await validateUser(username: username, password: password);
     String requestToken = "";
     bool error = false;
     String errorMessage = "";
 
-    tokenValidator.fold(
-      (token) => requestToken = token,
-      (errorMsg) {
-        error = true;
-        errorMessage = errorMsg;
-      },
-    );
+    tokenValidator.fold((token) => requestToken = token, (errorMsg) {
+      error = true;
+      errorMessage = errorMsg;
+    });
 
     if (error) {
       return Right(errorMessage);
@@ -82,14 +77,18 @@ class AuthService {
   }
 
   Future<Either<String, ErrorMessage>> getGuestSessionId() async {
-    String uri =
-        "${ApiConstants.baseUrl}/authentication/guest_session/new?api_key=${ApiConstants.apiKey}";
-    final apiData = await _apiService.getApiData(uri);
+    try {
+      String uri =
+          "${ApiConstants.baseUrl}/authentication/guest_session/new?api_key=${ApiConstants.apiKey}";
+      final apiData = await _apiService.getApiData(uri);
 
-    if (apiData["success"] == true) {
-      return Left(apiData["guest_session_id"]);
-    } else {
-      return Right(apiData["status_message"]);
+      if (apiData["success"] == true) {
+        return Left(apiData["guest_session_id"]);
+      } else {
+        return Right(apiData["status_message"]);
+      }
+    } catch (e) {
+      return Right("Request failed.");
     }
   }
 }

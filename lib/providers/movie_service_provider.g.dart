@@ -6,36 +6,46 @@ part of 'movie_service_provider.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-// ignore_for_file: avoid_private_typedef_functions, non_constant_identifier_names, subtype_of_sealed_class, invalid_use_of_internal_member, unused_element, constant_identifier_names, unnecessary_raw_strings, library_private_types_in_public_api
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
 
-/// Copied from Dart SDK
-class _SystemHash {
-  _SystemHash._();
+@ProviderFor(movieService)
+final movieServiceProvider = MovieServiceProvider._();
 
-  static int combine(int hash, int value) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + value);
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x0007ffff & hash) << 10));
-    return hash ^ (hash >> 6);
+final class MovieServiceProvider
+    extends $FunctionalProvider<MovieService, MovieService, MovieService>
+    with $Provider<MovieService> {
+  MovieServiceProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'movieServiceProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$movieServiceHash();
+
+  @$internal
+  @override
+  $ProviderElement<MovieService> $createElement($ProviderPointer pointer) =>
+      $ProviderElement(pointer);
+
+  @override
+  MovieService create(Ref ref) {
+    return movieService(ref);
   }
 
-  static int finish(int hash) {
-    // ignore: parameter_assignments
-    hash = 0x1fffffff & (hash + ((0x03ffffff & hash) << 3));
-    // ignore: parameter_assignments
-    hash = hash ^ (hash >> 11);
-    return 0x1fffffff & (hash + ((0x00003fff & hash) << 15));
+  /// {@macro riverpod.override_with_value}
+  Override overrideWithValue(MovieService value) {
+    return $ProviderOverride(
+      origin: this,
+      providerOverride: $SyncValueProvider<MovieService>(value),
+    );
   }
 }
 
-String $movieServiceHash() => r'af1814cc4e27197e064f4d0e7dc94dd52a9d22d0';
-
-/// See also [movieService].
-final movieServiceProvider = AutoDisposeProvider<MovieService>(
-  movieService,
-  name: r'movieServiceProvider',
-  debugGetCreateSourceHash:
-      const bool.fromEnvironment('dart.vm.product') ? null : $movieServiceHash,
-);
-typedef MovieServiceRef = AutoDisposeProviderRef<MovieService>;
+String _$movieServiceHash() => r'7a61f64ce75d58cc6623ac947e91513803b496f0';
